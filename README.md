@@ -1,3 +1,3 @@
 # dotfiles
 
-![Screenshot](assets/preview.png)
+![Screenshot](assets/preview_0.png)

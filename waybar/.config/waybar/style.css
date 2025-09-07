@@ -1,0 +1,173 @@
+* {
+  font-family: "JetBrainsMono Nerd Font", FontAwesome, monospace;
+  font-size: 14px;
+  border-radius: 2px;
+}
+
+tooltip {
+  font-size: 14px;
+  background-color: #1d2021; /* Gruvbox dark0_hard */
+  color: #ebdbb2;            /* Gruvbox fg0 */
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #3c3836; /* Gruvbox dark1 */
+}
+
+window#waybar {  
+  background-color: transparent;
+  color: #ebdbb2;
+  transition: background-color 0.5s;
+}
+
+window#waybar.hidden {
+  opacity: 0.2;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+/* Module spacing */
+.modules-left {
+  margin: 4px 0 0 4px;
+}
+.modules-center {
+  margin: 4px 0 0 0;
+}
+.modules-right {
+  margin: 4px 4px 0 0;
+}
+
+button {
+  border: none;
+}
+
+/* Workspaces */
+#workspaces {
+  background-color: #282828;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  background-color: transparent;
+  color: #ebdbb2;
+  font-weight: bold;
+  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  transition: background-color 0.2s ease;
+}
+
+#workspaces button:first-child {
+  border-radius: 2px 0 0 2px;
+}
+
+#workspaces button:last-child {
+  border-radius: 0 2px 2px 0;
+}
+
+#workspaces button:hover {
+  background-color: #3c3836;
+  color: #fabd2f;
+}
+
+#workspaces button.active {
+  background-color: #665c54;
+  color: #ebdbb2;
+  border-radius: 2px;
+}
+
+#workspaces button.urgent {
+  background-color: #b16286;
+  color: #333333;
+}
+
+#custom-cpu,
+#memory {
+  font-weight: bold;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  padding: 0 10px;
+  background-color: #282828;
+  color: #ebdbb2;
+}
+
+#custom-memory {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-weight: bold;
+  padding: 0 10px;
+  background-color: #282828;
+  color: inherit;
+}
+
+
+#custom-gpu {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-weight: bold;
+  padding: 0 10px;
+  background-color: #282828;
+  color: inherit; /* honor dynamic color */
+}
+
+/* Individual modules */
+#idle_inhibitor,
+#cava,
+#scratchpad,
+#mode,
+#window,
+#clock,
+#battery,
+#backlight,
+#wireplumber,
+#tray,
+#mpris,
+#custom-cpu_temp,
+#custom-gpu_temp,
+#custom-gpu_usage,
+#custom-net_speed,
+#custom-disk_speed,
+#keyboard-state,
+#cpu,
+#custom-vpn,
+#memory,
+#load {
+  padding: 0 10px;
+  background-color: #282828;
+  color: #ebdbb2;
+  font-weight: bold;
+}
+
+#mode {
+  background-color: #689d6a;
+  color: #282828;
+}
+
+#battery.charging,
+#battery.plugged {
+  background-color: #98971a;
+  color: #282828;
+}
+
+#battery.critical:not(.charging) {
+  background-color: #cc241d;
+  color: #ebdbb2;
+  animation: blink 0.5s steps(12) infinite alternate;
+}
+
+@keyframes blink {
+  to {
+    background-color: #282828;
+    color: #ebdbb2;
+  }
+}
+
+#wireplumber.muted {
+  background-color: #458588;
+}
+
+#mpris.playing {
+  background-color: #d79921;
+  color: #282828;
+}
+
+label:focus {
+  background-color: #ffffff;
+}
+

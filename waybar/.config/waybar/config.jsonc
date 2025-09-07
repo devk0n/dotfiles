@@ -1,0 +1,122 @@
+[
+  {
+    "output": ["DP-1", "DP-2"],
+    "height": 28,
+    "spacing": 4,
+
+    "modules-left": [
+      "custom/vpn",
+      "hyprland/workspaces",
+      "mpris"
+    ],
+    "modules-center": [
+      "hyprland/window"
+    ],
+    "modules-right": [
+      "custom/cpu",
+      "custom/gpu",
+      "custom/memory",
+      "wireplumber",
+      "clock"
+    ],
+
+    "hyprland/workspaces": {
+      "all-outputs": false, // Show only workspaces for this monitor
+      "warp-on-scroll": false,
+      "enable-bar-scroll": true,
+      "disable-scroll-wraparound": true,
+      "format": "{icon}",
+      "format-icons": {
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+        "10": "10"
+      }
+    },
+
+    "hyprland/window": {
+      "format": "{title}",
+      "max-length": 40,
+      "all-outputs": true
+    },
+
+    "mpris": {
+      "format": "{title}",
+      "max-length": 80,
+      "on-click": "playerctl play-pause",
+      "on-scroll-up": "playerctl next",
+      "on-scroll-down": "playerctl previous"
+    },
+   
+    "load": {
+      "format": " {}"
+    },
+  
+    "keyboard-state": {
+      "format": "{}",
+      "format-alt": "Layout: {}",
+      "show-layout": true,
+      "show-indicator": false,
+      "keyboard-name": "*"
+    },
+
+    "custom/vpn": {
+      "format": " {}",  // or just "{}" if you like
+      "exec": "~/.config/waybar/scripts/vpn_status.sh",
+      "interval": 5,
+      "return-type": "json",
+      "on-click": "~/.config/waybar/scripts/vpn_toggle.sh"
+    },
+
+
+    "custom/memory": {
+      "exec": "~/.config/waybar/scripts/memory.sh",
+      "interval": 3,
+      "return-type": "json"
+    },
+
+    "custom/cpu": {
+      "exec": "~/.config/waybar/scripts/cpu.sh",
+      "interval": 3,
+      "return-type": "json"
+    },
+
+    "custom/gpu": {
+      "exec": "~/.config/waybar/scripts/gpu.sh",
+      "interval": 3,
+      "return-type": "json"
+    },
+
+    "clock": {
+      "format": "{:%H:%M:%S}", // Shows hours, minutes, and seconds
+      "tooltip-format": "<b>{:%A %d. %B %Y}</b>\n\n<tt>{calendar}</tt>",
+      "format-alt": "{:%d.%m.%Y}",
+      "interval": 1
+    },
+
+    "wireplumber": {
+      "scroll-step": 5,
+      "format": "{icon} {volume}%",
+      "format-bluetooth": "{icon} {volume}% ",
+      "format-bluetooth-muted": " {icon}",
+      "format-muted": " ",
+      "format-icons": {
+        "headphone": " ",
+        "hands-free": " ",
+        "headset": " ",
+        "phone": " ",
+        "portable": " ",
+        "car": " ",
+        "default": [" ", " ", " "]
+      },
+      "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+    }
+  }
+]
+

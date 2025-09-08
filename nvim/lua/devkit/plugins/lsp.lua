@@ -1,11 +1,22 @@
+
 return {
   {
-    "folke/neodev.nvim",
+    "williamboman/mason.nvim",
     opts = {},
   },
   {
+    "williamboman/mason-lspconfig.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = { "clangd", "cmake" }, -- auto-install servers
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
-    dependencies = { "hrsh7th/cmp-nvim-lsp" },
+    dependencies = {
+      "hrsh7th/cmp-nvim-lsp",
+      "williamboman/mason-lspconfig.nvim",
+    },
     config = function()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -37,22 +48,31 @@ return {
         end, opts)
       end
 
-      -- Define sign icons for each severity
+      -- Diagnostic signs
       local signs = {
         [vim.diagnostic.severity.ERROR] = " ",
         [vim.diagnostic.severity.WARN]  = " ",
         [vim.diagnostic.severity.HINT]  = "󰠠 ",
         [vim.diagnostic.severity.INFO]  = " ",
       }
-
-      -- Set the diagnostic config with all icons
       vim.diagnostic.config({
-        signs = {
-          text = signs            -- Enable signs in the gutter
-        },
-        virtual_text = true,      -- Specify Enable virtual text for diagnostics
-        underline = true,         -- Specify Underline diagnostics
-        update_in_insert = false, -- Keep diagnostics active in insert mode
+        signs = { text = signs },
+        virtual_text = true,
+        underline = true,
+        update_in_insert = false,
+      })
+
+      -- C/C++
+      lspconfig.clangd.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        cmd = { "clangd", "--background-index", "--clang-tidy" },
+      })
+
+      -- CMake
+      lspconfig.cmake.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
       })
     end,
   },

@@ -1,30 +1,15 @@
-
 return {
   {
-    "williamboman/mason.nvim",
-    opts = {},
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    opts = {
-      ensure_installed = { "clangd", "cmake" }, -- auto-install servers
-    },
-  },
-  {
     "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "williamboman/mason-lspconfig.nvim",
-    },
+    dependencies = { "hrsh7th/cmp-nvim-lsp" },
     config = function()
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Common on_attach for keymaps
+      -- Common keymaps when LSP attaches
       local on_attach = function(_, bufnr)
-        local opts = { noremap = true, silent = true, buffer = bufnr }
         local keymap = vim.keymap.set
+        local opts = { noremap = true, silent = true, buffer = bufnr }
 
         -- Navigation
         keymap("n", "gd", vim.lsp.buf.definition, opts)
@@ -42,35 +27,51 @@ return {
         keymap("n", "]d", vim.diagnostic.goto_next, opts)
         keymap("n", "<leader>q", vim.diagnostic.setloclist, opts)
 
-        -- Formatting (if supported)
+        -- Formatting
         keymap("n", "<leader>f", function()
           vim.lsp.buf.format({ async = true })
         end, opts)
       end
 
       -- Diagnostic signs
-      local signs = {
-        [vim.diagnostic.severity.ERROR] = " ",
-        [vim.diagnostic.severity.WARN]  = " ",
-        [vim.diagnostic.severity.HINT]  = "󰠠 ",
-        [vim.diagnostic.severity.INFO]  = " ",
-      }
       vim.diagnostic.config({
-        signs = { text = signs },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN]  = " ",
+            [vim.diagnostic.severity.HINT]  = "󰠠 ",
+            [vim.diagnostic.severity.INFO]  = " ",
+          },
+        },
         virtual_text = true,
         underline = true,
         update_in_insert = false,
       })
 
-      -- C/C++
+      -- LSP servers
       lspconfig.clangd.setup({
         capabilities = capabilities,
         on_attach = on_attach,
         cmd = { "clangd", "--background-index", "--clang-tidy" },
       })
 
-      -- CMake
       lspconfig.cmake.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      lspconfig.lua_ls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        settings = {
+          Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = { checkThirdParty = false },
+          },
+        },
+      })
+
+      lspconfig.bashls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })

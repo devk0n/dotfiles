@@ -27,3 +27,6 @@ alias ports='ss -tulwn'               # list open network ports
 
 # --- Editor ---
 alias vim='nvim'
+
+# --- ESP-IDF ---
+alias get_idf='. $HOME/esp/esp-idf/export.sh'

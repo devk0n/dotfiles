@@ -11,8 +11,8 @@ return {
   -- Setup
   config = function()
     require("oil").setup({
-      default_file_explorer = true,    -- replace netrw with Oil
-      delete_to_trash = true,          -- requires `trash-cli` on Linux
+      default_file_explorer = true, -- replace netrw with Oil
+      delete_to_trash = true,       -- requires `trash-cli` on Linux
       skip_confirm_for_simple_edits = true,
       watch_for_changes = true,
 
@@ -24,14 +24,14 @@ return {
 
       -- Oil-specific keymaps (only inside Oil buffers)
       keymaps = {
-        ["<C-h>]"] = false,            -- example: disable built-in if you don’t want it
-        ["<C-c>"] = false,             -- don’t close Oil on <C-c>
+        ["<C-h>]"] = false, -- example: disable built-in if you don’t want it
+        ["<C-c>"] = false,  -- don’t close Oil on <C-c>
         ["<M-h>"] = "actions.select_split",
         ["q"] = "actions.close",
       },
 
       view_options = {
-        show_hidden = true,            -- show dotfiles
+        show_hidden = true, -- show dotfiles
       },
     })
 
@@ -54,7 +54,7 @@ return {
       callback = function()
         local dir = require("oil").get_current_dir()
         if dir then
-          vim.cmd.cd(dir)   -- change cwd
+          vim.cmd.cd(dir) -- change cwd
         end
       end,
       desc = "Oil: follow current directory",

@@ -17,9 +17,9 @@ return {
       }
     end,
     keys = {
-      { "<leader>pf", function() require("fzf-lua").files() end, desc = "Find Files" },
+      { "<leader>pf", function() require("fzf-lua").files() end,                                              desc = "Find Files" },
       { "<leader>pc", function() require("fzf-lua").files({ cwd = vim.fn.expand("~/.config/nvim/lua") }) end, desc = "Find Config" },
-      { "<leader>ps", function() require("fzf-lua").live_grep() end, desc = "Grep" },
+      { "<leader>ps", function() require("fzf-lua").live_grep() end,                                          desc = "Grep" },
       {
         "<leader>pws",
         function()
@@ -40,7 +40,7 @@ return {
   {
     "kdheepak/lazygit.nvim",
     keys = {
-      { "<leader>lg", "<cmd>LazyGit<cr>", desc = "Lazygit" },
+      { "<leader>lg", "<cmd>LazyGit<cr>",                  desc = "Lazygit" },
       { "<leader>gl", "<cmd>LazyGitFilterCurrentFile<cr>", desc = "Lazygit Logs (file)" },
     },
   },

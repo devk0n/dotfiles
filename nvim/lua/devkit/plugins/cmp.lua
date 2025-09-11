@@ -2,11 +2,11 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",                 -- LSP completions
-    "hrsh7th/cmp-nvim-lsp-signature-help",  -- function signatures
-    "hrsh7th/cmp-path",                     -- filesystem paths
-    "saadparwaiz1/cmp_luasnip",             -- snippet support
-    "L3MON4D3/LuaSnip",                     -- snippet engine
+    "hrsh7th/cmp-nvim-lsp",                -- LSP completions
+    "hrsh7th/cmp-nvim-lsp-signature-help", -- function signatures
+    "hrsh7th/cmp-path",                    -- filesystem paths
+    "saadparwaiz1/cmp_luasnip",            -- snippet support
+    "L3MON4D3/LuaSnip",                    -- snippet engine
   },
   config = function()
     local cmp = require("cmp")

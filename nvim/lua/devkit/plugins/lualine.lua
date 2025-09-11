@@ -1,6 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",            -- load after UI is ready (and after colorscheme)
+  event = "VeryLazy", -- load after UI is ready (and after colorscheme)
   dependencies = {
     "nvim-tree/nvim-web-devicons",
     "lewis6991/gitsigns.nvim",
@@ -9,7 +9,7 @@ return {
     require("gitsigns").setup()
     require("lualine").setup({
       options = {
-        theme = "auto",          -- now picks up your active scheme
+        theme = "auto", -- now picks up your active scheme
         globalstatus = true,
         always_divide_middle = false,
         section_separators = { left = "", right = "" },
@@ -30,8 +30,12 @@ return {
         lualine_z = { "location" },
       },
       inactive_sections = {
-        lualine_a = {}, lualine_b = {}, lualine_c = { "filename" },
-        lualine_x = {}, lualine_y = {}, lualine_z = {},
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = { "filename" },
+        lualine_x = {},
+        lualine_y = {},
+        lualine_z = {},
       },
     })
   end,

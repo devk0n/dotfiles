@@ -6,7 +6,7 @@ return {
       local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
-      -- Common keymaps when LSP attaches
+      -- Common keymaps
       local on_attach = function(_, bufnr)
         local keymap = vim.keymap.set
         local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -31,16 +31,21 @@ return {
         keymap("n", "<leader>f", function()
           vim.lsp.buf.format({ async = true })
         end, opts)
+        keymap("n", "<leader>af", function()
+          vim.lsp.buf.code_action({
+            apply = true,
+          })
+        end, opts)
       end
 
       -- Diagnostic signs
       vim.diagnostic.config({
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = " ",
-            [vim.diagnostic.severity.WARN]  = " ",
-            [vim.diagnostic.severity.HINT]  = "󰠠 ",
-            [vim.diagnostic.severity.INFO]  = " ",
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN]  = "",
+            [vim.diagnostic.severity.HINT]  = "󰠠",
+            [vim.diagnostic.severity.INFO]  = "",
           },
         },
         virtual_text = true,
@@ -48,18 +53,28 @@ return {
         update_in_insert = false,
       })
 
-      -- LSP servers
+      -- === LSP servers ===
+
+      -- C / C++
       lspconfig.clangd.setup({
         capabilities = capabilities,
         on_attach = on_attach,
-        cmd = { "clangd", "--background-index", "--clang-tidy" },
+        cmd = {
+          "clangd",
+          "--background-index",
+          "--clang-tidy",
+          "--header-insertion=iwyu", -- suggest headers (include-what-you-use)
+          "--header-insertion-decorators",
+        },
       })
 
+      -- CMake
       lspconfig.cmake.setup({
         capabilities = capabilities,
         on_attach = on_attach,
       })
 
+      -- Lua (for Neovim configs)
       lspconfig.lua_ls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
@@ -71,6 +86,7 @@ return {
         },
       })
 
+      -- Bash
       lspconfig.bashls.setup({
         capabilities = capabilities,
         on_attach = on_attach,

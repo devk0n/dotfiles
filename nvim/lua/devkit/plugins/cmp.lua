@@ -2,26 +2,26 @@ return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
   dependencies = {
-    "hrsh7th/cmp-nvim-lsp",                -- LSP completions
-    "hrsh7th/cmp-nvim-lsp-signature-help", -- function signatures
-    "hrsh7th/cmp-path",                    -- filesystem paths
-    "saadparwaiz1/cmp_luasnip",            -- snippet support
-    "L3MON4D3/LuaSnip",                    -- snippet engine
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-path",
+    "hrsh7th/cmp-buffer",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
   },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
 
+    -- Default setup (snippets etc. for non-C++ languages)
     cmp.setup({
       snippet = {
-        expand = function(args) luasnip.lsp_expand(args.body) end,
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end,
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-e>"] = cmp.mapping.abort(),
-        ["<CR>"] = cmp.mapping.confirm({ select = true }),
-
-        -- Tab navigation
+        ["<CR>"] = cmp.mapping.confirm({ select = false }),
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
@@ -31,7 +31,6 @@ return {
             fallback()
           end
         end, { "i", "s" }),
-
         ["<S-Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_prev_item()
@@ -44,14 +43,43 @@ return {
       }),
       sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "nvim_lsp_signature_help" },
         { name = "luasnip" },
         { name = "path" },
+        { name = "buffer" },
       }),
-      experimental = { ghost_text = true },
     })
 
-    -- Disable in Oil buffers
-    cmp.setup.filetype("oil", { enabled = false })
+    -- Override for C / C++ / headers → no snippets + safe <CR>
+    cmp.setup.filetype({ "c", "cpp", "hpp" }, {
+      mapping = {
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<CR>"] = cmp.mapping(function(fallback)
+          if cmp.visible() and cmp.get_selected_entry() then
+            cmp.confirm({ select = false })
+          else
+            fallback() -- just newline
+          end
+        end, { "i", "s" }),
+        ["<Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          else
+            fallback() -- insert tab or spaces
+          end
+        end, { "i", "s" }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          else
+            fallback()
+          end
+        end, { "i", "s" }),
+      },
+      sources = cmp.config.sources({
+        { name = "nvim_lsp" },
+        { name = "path" },
+        { name = "buffer" },
+      }),
+    })
   end,
 }

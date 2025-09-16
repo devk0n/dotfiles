@@ -24,9 +24,10 @@ alias rm='rm -i'
 alias cls='clear'
 alias path='echo -e ${PATH//:/\\n}'   # pretty-print $PATH
 alias ports='ss -tulwn'               # list open network ports
+alias rebuild='rm -rf build && mkdir build && cd build && cmake .. && make -j$(nproc) && cd ..'
 
 # --- Editor ---
 alias vim='nvim'
 
 # --- ESP-IDF ---
-alias get_idf='. $HOME/esp/esp-idf/export.sh'
+alias idf='. $HOME/esp/esp-idf/export.sh'

@@ -33,3 +33,24 @@ cd ~/dotfiles
 
 The included stow.sh script symlinks each folder into your ~/.config directory.
 You can also run it again to restow any updates.
+
+## Enable autologin on TTY1
+Run:
+```bash
+sudo systemctl edit getty@tty1.service
+```
+Paste this override:
+
+```bash
+
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --autologin USERNAME --noclear %I $TERM
+```
+(replace USERNAME with your username)
+
+Then reload systemd:
+```bash
+sudo systemctl daemon-reexec
+```
+

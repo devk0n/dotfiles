@@ -22,14 +22,9 @@ keymap.set("n", "n", "nzzzv", { desc = "Next match (centered)" })
 keymap.set("n", "N", "Nzzzv", { desc = "Prev match (centered)" })
 keymap.set("n", "<Esc>", ":nohl<CR>", { desc = "Clear search highlight", noremap = true, silent = true })
 
--- Indentation (visual mode)
+-- Indentation
 keymap.set("v", ">", ">gv", { desc = "Indent right (stay in selection)" })
 keymap.set("v", "<", "<gv", { desc = "Indent left (stay in selection)" })
-
--- Substitution
-keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], {
-  desc = "Substitute word under cursor (buffer-wide)",
-})
 
 -- Autocommands
 vim.api.nvim_create_autocmd("TextYankPost", {

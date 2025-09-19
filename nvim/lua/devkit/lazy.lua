@@ -1,3 +1,6 @@
+-- ~/.config/nvim/init.lua
+
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -5,26 +8,26 @@ if not vim.loop.fs_stat(lazypath) then
     "clone",
     "--filter=blob:none",
     "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
+    "--branch=stable", -- latest stable release
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup(
-  {
-    { import = "devkit.plugins" },
+-- Setup plugins
+require("lazy").setup({
+  spec = {
+    { import = "devkit.plugins" }, -- your plugins
   },
-  {
-    checker = {
-      enabled = true,
-      notify = false,
-    },
-    change_detection = {
-      notify = false,
-    },
-    rocks = {
-      enabled = false,
-    },
-  }
-)
+  checker = {
+    enabled = true, -- automatically check for plugin updates
+    notify = false,
+  },
+  change_detection = {
+    enabled = true, -- reload config when files change
+    notify = false,
+  },
+  rocks = {
+    enabled = false, -- disable luarocks (you probably don’t need it)
+  },
+})

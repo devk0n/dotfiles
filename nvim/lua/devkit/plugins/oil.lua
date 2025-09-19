@@ -28,6 +28,7 @@ return {
         ["<C-c>"] = false,  -- don’t close Oil on <C-c>
         ["<M-h>"] = "actions.select_split",
         ["q"] = "actions.close",
+        ["<Esc>"] = "actions.close",
       },
 
       view_options = {
@@ -36,8 +37,8 @@ return {
     })
 
     -- Global mappings
-    vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
     vim.keymap.set("n", "-", require("oil").toggle_float, { desc = "Oil (float)" })
+    vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
     -- Buffer-local tweaks in Oil
     vim.api.nvim_create_autocmd("FileType", {

@@ -1,5 +1,3 @@
--- ~/.config/nvim/lua/devkit/lsp.lua
-
 -- Capabilities (completion, snippets, etc.)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -23,15 +21,20 @@ local function lsp_autocmd(filetypes, opts)
   })
 end
 
--- ==========================
 -- Language servers
--- ==========================
 
 -- C / C++
 lsp_autocmd({ "c", "cpp", "objc", "objcpp" }, {
   name = "clangd",
   cmd = { "clangd", "--background-index", "--clang-tidy" },
   root_patterns = { ".git", "compile_commands.json" },
+})
+
+-- CMake
+lsp_autocmd({ "cmake" }, {
+  name = "cmake",
+  cmd = { "cmake-language-server" },
+  root_patterns = { ".git", "CMakeLists.txt" },
 })
 
 -- Lua
@@ -87,9 +90,7 @@ lsp_autocmd({ "sh" }, {
   root_patterns = { ".git" },
 })
 
--- ==========================
 -- Keymaps (global for all LSPs)
--- ==========================
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local bufnr = args.buf

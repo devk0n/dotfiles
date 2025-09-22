@@ -20,7 +20,7 @@ return {
           program = function()
             return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
           end,
-          cwd = "${workspaceFolder}",
+          cwd = vim.fn.getcwd(),
           stopAtEntry = false,
         },
       }

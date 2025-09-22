@@ -59,6 +59,35 @@ local function lsp_autocmd(filetypes, opts)
   })
 end
 
+-- User command: LspRestart
+vim.api.nvim_create_user_command("LspRestart", function(opts)
+  local clients = vim.lsp.get_clients()
+  local target = opts.args ~= "" and opts.args or "all"
+
+  if target == "all" then
+    for _, client in pairs(clients) do
+      vim.lsp.stop_client(client.id, true)
+    end
+    vim.cmd("edit") -- reload buffer to trigger autocmd -> lsp_autocmd
+    print("Restarted all LSP clients")
+  else
+    for _, client in pairs(clients) do
+      if client.name == target then
+        vim.lsp.stop_client(client.id, true)
+        vim.cmd("edit")
+        print("Restarted LSP: " .. target)
+        return
+      end
+    end
+    print("No active LSP client named " .. target)
+  end
+end, {
+  nargs = "?",
+  complete = function()
+    return vim.tbl_map(function(c) return c.name end, vim.lsp.get_clients())
+  end,
+})
+
 -- Language servers
 
 -- C / C++

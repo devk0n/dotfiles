@@ -12,8 +12,8 @@ o.colorcolumn = "80"   -- thin visual guide at 80 columns
 o.wrap = false          -- don't soft-wrap long lines
 
 -- Cursor guides
-o.cursorline = true
-o.cursorcolumn = true
+o.cursorline = false
+o.cursorcolumn = false
 
 -- Editing
 o.backspace = { "start", "eol", "indent" } -- behave like modern editors

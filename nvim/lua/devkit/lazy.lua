@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup plugins
 require("lazy").setup({
+  defaults = { version = "*" },
   spec = {
     { import = "devkit.plugins" }, -- your plugins
   },

@@ -1,5 +1,5 @@
 * {
-  font-family: "JetBrainsMono Nerd Font", FontAwesome, monospace;
+  font-family: "FiraCode Nerd Font", FontAwesome, monospace;
   font-size: 14px;
   border-radius: 2px;
 }
@@ -52,7 +52,7 @@ button {
   background-color: transparent;
   color: #ebdbb2;
   font-weight: bold;
-  font-family: "JetBrainsMono Nerd Font", sans-serif;
+  font-family: "FiraCode Nerd Font", sans-serif;
   transition: background-color 0.2s ease;
 }
 
@@ -83,14 +83,14 @@ button {
 #custom-cpu,
 #memory {
   font-weight: bold;
-  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-family: "FiraCode Nerd Font", monospace;
   padding: 0 10px;
   background-color: #282828;
   color: #ebdbb2;
 }
 
 #custom-memory {
-  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-family: "FiraCode Nerd Font", monospace;
   font-weight: bold;
   padding: 0 10px;
   background-color: #282828;
@@ -99,7 +99,7 @@ button {
 
 
 #custom-gpu {
-  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-family: "FiraCode Nerd Font", monospace;
   font-weight: bold;
   padding: 0 10px;
   background-color: #282828;

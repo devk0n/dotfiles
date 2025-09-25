@@ -34,6 +34,9 @@ cd ~/dotfiles
 The included stow.sh script symlinks each folder into your ~/.config directory.
 You can also run it again to restow any updates.
 
+## Font
+** FiraCode **
+
 ## Enable autologin on TTY1
 Run:
 ```bash

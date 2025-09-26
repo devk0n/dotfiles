@@ -3,6 +3,7 @@
 # Only load in interactive shells
 [[ $- != *i* ]] && return
 
-### 1. Enable Zsh completion system ###
-autoload -Uz compinit
+# Enable bash completion support inside zsh
+autoload -Uz compinit bashcompinit
 compinit
+bashcompinit

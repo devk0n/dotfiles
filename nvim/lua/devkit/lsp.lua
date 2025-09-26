@@ -24,18 +24,6 @@ vim.diagnostic.config({
   },
 })
 
--- Diagnostic config (floating windows, virtual text, etc.)
-vim.diagnostic.config({
-  virtual_text = {
-    prefix = "●", -- set "" if you want only signs
-  },
-  severity_sort = true,
-  float = {
-    border = "rounded",
-    source = "always",
-  },
-})
-
 -- Capabilities (completion, snippets, etc.)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
@@ -91,7 +79,7 @@ end, {
 -- Language servers
 
 -- C / C++
-lsp_autocmd({ "c", "cpp", "objc", "objcpp" }, {
+lsp_autocmd({ "c", "cpp" }, {
   name = "clangd",
   cmd = { "clangd", "--background-index", "--clang-tidy" },
   root_patterns = { ".git", "compile_commands.json" },
@@ -177,7 +165,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 
     -- Formatting (manual trigger)
-    vim.keymap.set("n", "<leader>f", function()
+    vim.keymap.set("n", "<leader>lf", function()
       vim.lsp.buf.format({ async = true })
     end, opts)
   end,

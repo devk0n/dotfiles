@@ -24,7 +24,7 @@ alias rm='rm -i'
 alias cls='clear'
 alias path='echo -e ${PATH//:/\\n}'   # pretty-print $PATH
 alias ports='ss -tulwn'               # list open network ports
-alias rebuild='rm -rf build && mkdir build && cd build && cmake .. && make -j$(nproc) && cd ..'
+alias rebuild='rm -rf build && mkdir build && cd build && cmake .. && make -j$(nproc)'
 
 # --- Editor ---
 alias vim='nvim'

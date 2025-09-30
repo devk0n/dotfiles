@@ -8,7 +8,7 @@ o.number = true         -- show absolute line number on cursor line
 o.relativenumber = true -- show relative numbers elsewhere
 o.signcolumn = "yes"    -- always show sign column (avoid text shift)
 o.scrolloff = 8         -- keep at least 8 lines visible above/below cursor
-o.colorcolumn = "80"   -- thin visual guide at 80 columns
+o.colorcolumn = "120"   -- thin visual guide at 80 columns
 o.wrap = false          -- don't soft-wrap long lines
 
 -- Cursor guides
@@ -21,9 +21,9 @@ o.isfname:append("@-@")                    -- treat @-@ as part of filenames (us
 
 -- Indentation / Tabs
 o.expandtab = true   -- insert spaces instead of tabs
-o.tabstop = 2        -- visual width of a tab
-o.softtabstop = 2    -- <Tab>/<BS> insert/delete 2 spaces
-o.shiftwidth = 2     -- >> and << shift by 2 spaces
+o.tabstop = 3        -- visual width of a tab
+o.softtabstop = 3    -- <Tab>/<BS> insert/delete 3 spaces
+o.shiftwidth = 3     -- >> and << shift by 3 spaces
 o.autoindent = true  -- copy indent from current line on newline
 o.smartindent = true -- smarter auto-indent for new lines
 

@@ -31,7 +31,7 @@ return {
                if not entry then return end
 
                -- Only intercept real files that end with .pdf (case-insensitive)
-                  if entry.type == "file" and entry.name:lower():match("%.pdf$") or entry.name:lower():match("%.png$") then
+               if entry.type == "file" and entry.name:lower():match("%.pdf$") or entry.name:lower():match("%.png$") then
                   local dir = oil.get_current_dir()
                   if dir then
                      local path = vim.fs.joinpath(dir, entry.name) -- nvim 0.10+
@@ -73,6 +73,9 @@ return {
          },
          gltf = {
             icon = "", color = "#FF8800", name = "GLTF"
+         },
+         flat = {
+            icon = "", color = "#89b4fa", name = "Flat"
          },
       }
 

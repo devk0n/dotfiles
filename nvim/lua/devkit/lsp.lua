@@ -135,5 +135,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
       vim.keymap.set("n", "<leader>lf", function()
          vim.lsp.buf.format({ async = true })
       end, opts)
+
+      -- Keymaps
+      vim.keymap.set("n", "<F5>", ":make<CR>")  -- build project
+      vim.keymap.set("n", "<F6>", ":copen<CR>") -- open quickfix window
+      vim.keymap.set("n", "<F7>", ":cnext<CR>") -- jump to next error
+      vim.keymap.set("n", "<F8>", ":cprev<CR>") -- jump to previous error
    end,
 })

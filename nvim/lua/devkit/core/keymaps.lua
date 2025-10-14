@@ -13,7 +13,7 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Editing
 keymap.set("n", "Q", "<nop>", { desc = "Disable Ex mode" })
-keymap.set("v", "p", '"_dp', { desc = "Paste without overwriting register" })
+keymap.set("v", "p", '"0p', { desc = "Paste without overwriting register" })
 keymap.set("n", "x", '"_x', { desc = "Delete character (no yank)" })
 
 -- Search

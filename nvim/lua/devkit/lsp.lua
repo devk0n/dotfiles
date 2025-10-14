@@ -105,43 +105,10 @@ lsp_autocmd({ "lua" }, {
    },
 })
 
--- Python
-lsp_autocmd({ "python" }, {
-   name = "pyright",
-   cmd = { "pyright-langserver", "--stdio" },
-   root_patterns = { ".git", "pyproject.toml", "setup.py", "requirements.txt" },
-})
-
--- Go
-lsp_autocmd({ "go", "gomod", "gowork", "gotmpl" }, {
-   name = "gopls",
-   cmd = { "gopls" },
-   root_patterns = { ".git", "go.work", "go.mod" },
-})
-
--- Rust
-lsp_autocmd({ "rust" }, {
-   name = "rust_analyzer",
-   cmd = { "rust-analyzer" },
-   root_patterns = { ".git", "Cargo.toml" },
-})
-
--- JSON / YAML
+-- JSON (for .gltf, package.json, etc.)
 lsp_autocmd({ "json" }, {
    name = "jsonls",
    cmd = { "vscode-json-language-server", "--stdio" },
-   root_patterns = { ".git" },
-})
-lsp_autocmd({ "yaml" }, {
-   name = "yamlls",
-   cmd = { "yaml-language-server", "--stdio" },
-   root_patterns = { ".git" },
-})
-
--- Bash / sh
-lsp_autocmd({ "sh" }, {
-   name = "bashls",
-   cmd = { "bash-language-server", "start" },
    root_patterns = { ".git" },
 })
 

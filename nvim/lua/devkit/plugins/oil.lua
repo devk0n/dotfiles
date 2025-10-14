@@ -12,7 +12,7 @@ return {
    config = function()
       require("oil").setup({
          default_file_explorer = true, -- replace netrw with Oil
-         delete_to_trash = true,    -- requires `trash-cli` on Linux
+         delete_to_trash = true,       -- requires `trash-cli` on Linux
          skip_confirm_for_simple_edits = true,
          watch_for_changes = true,
 
@@ -24,8 +24,30 @@ return {
 
          -- Oil-specific keymaps (only inside Oil buffers)
          keymaps = {
-            ["<C-h>]"] = false, -- example: disable built-in if you don’t want it
-            ["<C-c>"] = false, -- don’t close Oil on <C-c>
+            -- Replace the default enter behavior with a pdf-aware handler
+            ["<CR>"] = function()
+               local oil = require("oil")
+               local entry = oil.get_cursor_entry()
+               if not entry then return end
+
+               -- Only intercept real files that end with .pdf (case-insensitive)
+                  if entry.type == "file" and entry.name:lower():match("%.pdf$") or entry.name:lower():match("%.png$") then
+                  local dir = oil.get_current_dir()
+                  if dir then
+                     local path = vim.fs.joinpath(dir, entry.name) -- nvim 0.10+
+                     vim.fn.jobstart({ "firefox", path }, { detach = true })
+                  end
+                  return
+               end
+
+               -- Fallback to Oil’s normal select action
+               require("oil.actions").select.callback()
+            end,
+
+            -- Keep a quick way to open *any* file with the system default handler
+            ["gx"] = "actions.open_external",
+
+            ["<C-c>"] = false,
             ["<M-h>"] = "actions.select_split",
             ["q"] = "actions.close",
             ["<Esc>"] = "actions.close",
@@ -35,6 +57,24 @@ return {
             show_hidden = true, -- show dotfiles
          },
       })
+
+      -- override icons after oil setup
+      local devicons = require("nvim-web-devicons")
+      devicons.set_icon {
+         vert = {
+            icon = "", -- nf-fa-file_pdf
+            color = "#b30b00",
+            name = "Pdf"
+         },
+         frag = {
+            icon = "", -- can use same or different glyph
+            color = "#d35d5d",
+            name = "GLSLFragment"
+         },
+         gltf = {
+            icon = "", color = "#FF8800", name = "GLTF"
+         },
+      }
 
       -- Global mappings
       vim.keymap.set("n", "<leader>-", require("oil").toggle_float, { desc = "Oil (float)" })

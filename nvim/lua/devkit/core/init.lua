@@ -5,3 +5,10 @@ require("devkit.core.keymaps")
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+
+-- Make .gltf files use JSON filetype
+vim.filetype.add({
+  extension = {
+    gltf = "json",
+  },
+})

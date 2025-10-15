@@ -4,37 +4,78 @@ return {
       config = function()
          local dap = require("dap")
 
-         -- cpptools adapter (OpenDebugAD7)
+         local ok, json = pcall(function()
+            local file = io.open("/tmp/build-meta/config.json", "r")
+            if not file then return nil end
+            local data = file:read("*a")
+            file:close()
+            return vim.fn.json_decode(data)
+         end)
+
+         local buildmeta = ok and json or {}
+         local exe = buildmeta.EXECUTABLE_PATH
+         local root = buildmeta.PROJECT_ROOT
+
          dap.adapters.cppdbg = {
             id = "cppdbg",
             type = "executable",
-            command = vim.fn.expand("~/.local/share/cpptools/extension/debugAdapters/bin/OpenDebugAD7"),
+            command = "/home/devkon/.local/share/cpptools/extension/debugAdapters/bin/OpenDebugAD7",
          }
 
-         -- Config for C/C++ using arm-none-eabi-gdb and OpenOCD/JLink
          dap.configurations.cpp = {
             {
-               name = "Debug on target (OpenOCD/JLink)",
-               type = "cppdbg",   -- must match adapter id above
+               name = "Launch C++ program",
+               type = "cppdbg",
                request = "launch",
-               program = function()
-                  return vim.fn.input("Path to ELF: ", vim.fn.getcwd() .. "/build/", "file")
-               end,
-               cwd = "${workspaceFolder}",
+               program = exe,
+               cwd = root,
                stopAtEntry = false,
                MIMode = "gdb",
-               miDebuggerPath = "arm-none-eabi-gdb",
-               miDebuggerServerAddress = "localhost:3333", -- OpenOCD/JLinkGDBServer
-               setupCommands = {
-                  { text = "target remote localhost:3333" },
-                  { text = "monitor reset halt" },
-                  { text = "load" },
-               },
             },
          }
 
          -- Reuse for C
          dap.configurations.c = dap.configurations.cpp
+
+         -- Breakpoint: solid red circle
+         vim.fn.sign_define("DapBreakpoint", {
+            text = "", -- nicer circle (nf-md-record-circle-outline)
+            texthl = "DiagnosticError",
+            linehl = "",
+            numhl = ""
+         })
+
+         -- Conditional Breakpoint: circle with question mark
+         vim.fn.sign_define("DapBreakpointCondition", {
+            text = "", -- nf-fa-question-circle
+            texthl = "DiagnosticWarn",
+            linehl = "",
+            numhl = ""
+         })
+
+         -- Breakpoint Rejected: circle with cross
+         vim.fn.sign_define("DapBreakpointRejected", {
+            text = "", -- nf-oct-x
+            texthl = "DiagnosticError",
+            linehl = "",
+            numhl = ""
+         })
+
+         -- Execution stopped: right arrow
+         vim.fn.sign_define("DapStopped", {
+            text = "", -- nf-fa-arrow-right
+            texthl = "DiagnosticInfo",
+            linehl = "Visual",
+            numhl = ""
+         })
+
+         -- Log Point: info circle
+         vim.fn.sign_define("DapLogPoint", {
+            text = "", -- nf-fa-exclamation-circle
+            texthl = "DiagnosticHint",
+            linehl = "",
+            numhl = ""
+         })
 
          -- Keymaps
          vim.keymap.set("n", "<F5>", function() dap.continue() end)

@@ -2,7 +2,7 @@
 local o = vim.opt
 local g = vim.g
 
-o.makeprg = "cmake --build build -j8"
+-- o.makeprg = "cmake --build build -j8"
 
 -- UI
 o.termguicolors = true  -- enable 24-bit RGB colors

@@ -77,6 +77,17 @@ return {
          flat = {
             icon = "", color = "#89b4fa", name = "Flat"
          },
+
+         --- BuildTools Icons ---
+         activate = { icon = "", color = "#89b4fa", name = "ActivateScript" },
+         build    = { icon = "", color = "#89b4fa", name = "BuildScript" },
+         rebuild  = { icon = "", color = "#89b4fa", name = "RebuildScript" },
+         flash    = { icon = "", color = "#89b4fa", name = "FlashScript" },
+         init     = { icon = "", color = "#89b4fa", name = "InitScript" },
+         clean    = { icon = "", color = "#89b4fa", name = "CleanScript" },
+         run      = { icon = "", color = "#89b4fa", name = "RunScript" },
+         status   = { icon = "", color = "#89b4fa", name = "StatusScript" },
+         nuke     = { icon = "", color = "#89b4fa", name = "NukeBuildDir" },
       }
 
       -- Global mappings

@@ -4,12 +4,6 @@
 alias ls='ls --color=auto -A'      # show hidden files (skip . and ..)
 alias ll='ls -lhAX --color=auto'   # long, human-readable, grouped by extension
 
-# --- Navigation ---
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias ~='cd ~'
-
 # --- Search ---
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
@@ -21,5 +15,7 @@ alias mv='mv -i'
 alias rm='rm -i'
 
 # --- Convenience ---
+alias aliases='nvim ~/.config/zsh/aliases.zsh'
 alias path='echo -e ${PATH//:/\\n}'   # pretty-print $PATH
-alias rebuild='rm -rf build && mkdir build && cd build && cmake .. && make -j$(nproc) && cd ..'
+alias build='bear -- cmake --build build -j$(nproc) && source /tmp/build-meta/env.sh'
+alias rebuild='rm -rf build && cmake -S . -B build && build'

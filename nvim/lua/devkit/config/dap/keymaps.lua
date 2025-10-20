@@ -1,0 +1,17 @@
+return function(dap)
+   local map = vim.keymap.set
+   map("n", "<F5>", dap.continue, { desc = "DAP continue / start" })
+   map("n", "<S-F5>", dap.terminate, { desc = "DAP stop debugging" })
+   map("n", "<F9>", dap.toggle_breakpoint, { desc = "DAP toggle breakpoint" })
+   map("n", "<S-F9>", function()
+      dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+   end, { desc = "DAP conditional breakpoint" })
+   map("n", "<C-F9>", function()
+      dap.set_breakpoint(nil, nil, nil, true)
+   end, { desc = "DAP toggle breakpoint enabled" })
+   map("n", "<F10>", dap.step_over, { desc = "DAP step over" })
+   map("n", "<F11>", dap.step_into, { desc = "DAP step into" })
+   map("n", "<S-F11>", dap.step_out, { desc = "DAP step out" })
+   map("n", "<Leader>dr", dap.repl.open, { desc = "DAP open REPL" })
+   map("n", "<Leader>dl", dap.run_last, { desc = "DAP run last" })
+end

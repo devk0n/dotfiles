@@ -1,10 +1,10 @@
 return function()
    local signs = {
-      DapBreakpoint          = { "", "DiagnosticError" },
-      DapBreakpointCondition = { "", "DiagnosticWarn" },
-      DapBreakpointRejected  = { "", "DiagnosticError" },
-      DapStopped             = { "", "DiagnosticInfo", "Visual" },
-      DapLogPoint            = { "", "DiagnosticHint" },
+      DapBreakpoint          = { " ", "DiagnosticError" },
+      DapBreakpointCondition = { " ", "DiagnosticWarn" },
+      DapBreakpointRejected  = { " ", "DiagnosticError" },
+      DapStopped             = { " ", "DiagnosticInfo", "Visual" },
+      DapLogPoint            = { " ", "DiagnosticHint" },
    }
 
    for name, opts in pairs(signs) do

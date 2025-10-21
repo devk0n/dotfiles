@@ -4,6 +4,4 @@ return function(dap)
       type = "executable",
       command = "OpenDebugAD7",
    }
-   -- dap.adapters.python = { ... }
-   -- dap.adapters.node2 = { ... }
 end

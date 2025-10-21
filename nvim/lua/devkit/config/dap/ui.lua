@@ -2,7 +2,6 @@ return function(dap)
    local dapui = require("dapui")
 
    dapui.setup({
-      icons = { expanded = "▾", collapsed = "▸" },
       layouts = {
          {
             elements = {
@@ -11,7 +10,7 @@ return function(dap)
                { id = "stacks",      size = 0.2 },
                { id = "breakpoints", size = 0.2 },
             },
-            size = 65,
+            size = 50,
             position = "right",
          },
       },
@@ -19,6 +18,8 @@ return function(dap)
 
    dap.listeners.after.event_initialized["dapui_config"] = function()
       dapui.open()
+      _G.DebugModeActive = true
+      require("devkit.utils.lualine").reload()
    end
    dap.listeners.before.event_terminated["dapui_config"] = function()
       dapui.close()

@@ -3,11 +3,11 @@ return {
       "hrsh7th/nvim-cmp",
       event = "InsertEnter",
       dependencies = {
-         "hrsh7th/cmp-nvim-lsp",      -- LSP completions
-         "hrsh7th/cmp-buffer",        -- buffer words
-         "hrsh7th/cmp-path",          -- filesystem paths
-         "L3MON4D3/LuaSnip",          -- snippet engine
-         "saadparwaiz1/cmp_luasnip",  -- connect LuaSnip with cmp
+         "hrsh7th/cmp-nvim-lsp",         -- LSP completions
+         "hrsh7th/cmp-buffer",           -- buffer words
+         "hrsh7th/cmp-path",             -- filesystem paths
+         "L3MON4D3/LuaSnip",             -- snippet engine
+         "saadparwaiz1/cmp_luasnip",     -- connect LuaSnip with cmp
          "rafamadriz/friendly-snippets", -- big collection of ready-made snippets
       },
       config = function()
@@ -25,10 +25,10 @@ return {
             },
 
             mapping = cmp.mapping.preset.insert({
-               ["<C-b>"] = cmp.mapping.scroll_docs(-4),      -- scroll docs up
-               ["<C-f>"] = cmp.mapping.scroll_docs(4),       -- scroll docs down
-               ["<C-Space>"] = cmp.mapping.complete(),       -- trigger completion
-               ["<C-e>"] = cmp.mapping.abort(),              -- close menu
+               ["<C-b>"] = cmp.mapping.scroll_docs(-4),           -- scroll docs up
+               ["<C-f>"] = cmp.mapping.scroll_docs(4),            -- scroll docs down
+               ["<C-Space>"] = cmp.mapping.complete(),            -- trigger completion
+               ["<C-e>"] = cmp.mapping.abort(),                   -- close menu
                ["<CR>"] = cmp.mapping.confirm({ select = true }), -- confirm selection
 
                -- Tab to jump through snippets or cmp menu

@@ -11,11 +11,11 @@ return {
       local cmp = require("cmp")
 
       autopairs.setup({
-         check_ts = true,                                     -- use treesitter
+         check_ts = true,                                        -- use treesitter
          ts_config = {
-            lua = { "string" },                               -- don’t add pairs in Lua strings
+            lua = { "string" },                                  -- don’t add pairs in Lua strings
             javascript = { "template_string" },
-            java = false,                                     -- disable in Java
+            java = false,                                        -- disable in Java
          },
          disable_filetype = { "TelescopePrompt", "vim", "oil" }, -- don’t interfere
          fast_wrap = {

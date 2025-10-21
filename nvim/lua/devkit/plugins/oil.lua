@@ -61,20 +61,20 @@ return {
       -- override icons after oil setup
       local devicons = require("nvim-web-devicons")
       devicons.set_icon {
-         vert = {
+         vert     = {
             icon = "", -- nf-fa-file_pdf
             color = "#b30b00",
             name = "Pdf"
          },
-         frag = {
+         frag     = {
             icon = "", -- can use same or different glyph
             color = "#d35d5d",
             name = "GLSLFragment"
          },
-         gltf = {
+         gltf     = {
             icon = "", color = "#FF8800", name = "GLTF"
          },
-         flat = {
+         flat     = {
             icon = "", color = "#89b4fa", name = "Flat"
          },
 

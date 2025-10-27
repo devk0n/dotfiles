@@ -8,8 +8,7 @@ return function(dap)
          type = "cppdbg",
          request = "launch",
          program = (cmake_bin and project)
-             and (cmake_bin .. "/" .. project)
-             or (vim.fn.getcwd() .. "/build"),
+             and (cmake_bin .. "/" .. project),
          cwd = cmake_bin or vim.fn.getcwd(),
          stopAtEntry = false,
          MIMode = "gdb",

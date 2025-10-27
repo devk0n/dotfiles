@@ -5,6 +5,6 @@ return {
       "nvim-neotest/nvim-nio",
    },
    config = function()
-      require("devkit.config.dap") -- loads lua/config/dap/init.lua
+      require("config.dap")
    end,
 }

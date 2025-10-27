@@ -3,16 +3,16 @@ local o = vim.opt
 local g = vim.g
 
 -- UI
-o.termguicolors = true  -- enable 24-bit RGB colors
-o.number = true         -- show absolute line number on cursor line
-o.relativenumber = true -- show relative numbers elsewhere
-o.signcolumn = "yes"    -- always show sign column (avoid text shift)
-o.scrolloff = 8         -- keep at least 8 lines visible above/below cursor
-o.colorcolumn = "100"   -- thin visual guide at 80 columns
-o.wrap = false          -- don't soft-wrap long lines
+o.termguicolors = true   -- enable 24-bit RGB colors
+o.number = true          -- show absolute line number on cursor line
+o.relativenumber = true  -- show relative numbers elsewhere
+o.signcolumn = "yes"     -- always show sign column (avoid text shift)
+o.scrolloff = 8          -- keep at least 8 lines visible above/below cursor
+o.colorcolumn = "80,100,120" -- thin visual guide at 80 columns
+o.wrap = false           -- don't soft-wrap long lines
 
 -- Cursor guides
-o.cursorline = false
+o.cursorline = true
 o.cursorcolumn = false
 
 -- Editing

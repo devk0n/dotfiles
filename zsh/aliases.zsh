@@ -17,5 +17,3 @@ alias rm='rm -i'
 # --- Convenience ---
 alias aliases='nvim ~/.config/zsh/aliases.zsh'
 alias path='echo -e ${PATH//:/\\n}'   # pretty-print $PATH
-alias build='bear -- cmake --build build -j$(nproc) && source /tmp/build-meta/env.sh'
-alias rebuild='rm -rf build && cmake -S . -B build && build'

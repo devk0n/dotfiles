@@ -25,8 +25,17 @@ return {
          end,
          desc = "Oil: follow current directory",
       })
+
+      vim.api.nvim_create_autocmd({ "BufEnter" }, {
+         callback = function()
+            local ft = vim.bo.filetype
+            if ft == "markdown" then
+               -- Only open preview if not already open
+               vim.cmd("MarkdownPreview")
+            end
+         end,
+      })
    end,
+
    vim.keymap.set("n", "-", "<CMD>Oil<CR>")
-
-
 }

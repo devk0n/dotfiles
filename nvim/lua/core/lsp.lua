@@ -8,8 +8,16 @@ vim.diagnostic.config({
          [vim.diagnostic.severity.INFO]  = " ",
       },
    },
-   virtual_text = { prefix = "●" },
-   float = { border = "rounded" },
+   virtual_text = {
+      prefix = "●",
+      spacing = 2,
+   },
+   float = {
+      border = "rounded",
+      source = "always",
+      focusable = true,
+   },
+   severity_sort = true,
 })
 
 -- Remove backgrounds from diagnostic floats + virtual text
@@ -118,6 +126,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
       map("n", "[d", vim.diagnostic.goto_prev, opts)
       map("n", "]d", vim.diagnostic.goto_next, opts)
+
+      map("n", "<leader>k", function() vim.diagnostic.open_float(nil, { focus = false }) end, opts)
 
       map("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, opts)
    end,

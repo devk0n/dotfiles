@@ -1,0 +1,28 @@
+/* ------- REMOVE ALL TOOLBARS ------- */
+#TabsToolbar {
+   visibility: collapse !important;
+}
+
+#nav-bar {
+   visibility: collapse !important;
+}
+
+#PersonalToolbar {
+   visibility: collapse !important;
+}
+
+/* Removes sidebar button, unified extension button, everything */
+#navigator-toolbox {
+   visibility: collapse !important;
+}
+
+/* Remove gaps/padding */
+:root {
+   --toolbarbutton-border-radius: 0 !important;
+   --tabs-border-radius: 0 !important;
+}
+
+/* Disable ugly fullscreen warnings */
+#fullscreen-warning {
+   display: none !important;
+}

@@ -1,5 +1,6 @@
 return {
    "iamcco/markdown-preview.nvim",
+   ft = { "markdown", "md" },
 
    build = function()
       vim.fn["mkdp#util#install"]()
@@ -32,8 +33,12 @@ return {
          })
       end
 
-      -- --- Keymaps --- --
-      local opts = { buffer = true, silent = true }
-      vim.keymap.set("n", "<leader>md", "<cmd>MarkdownPreviewToggle<CR>", opts)
+      -- Keymap only for markdown buffers
+      vim.api.nvim_create_autocmd("FileType", {
+         pattern = "markdown",
+         callback = function()
+            vim.keymap.set("n", "<leader>md", "<cmd>MarkdownPreview<CR>", { buffer = true, silent = true })
+         end,
+      })
    end,
 }

@@ -7,37 +7,68 @@ return {
    },
    config = function()
       local fzf = require("fzf-lua")
+
       fzf.setup({
          winopts = {
             height  = 0.85,
             width   = 0.80,
             preview = {
-               -- fallback: use builtin previewer if bat fails
                default = "builtin",
-               -- try bat first, fallback to builtin
                extensions = {
-                  [""]    = "builtin", -- directories (no extension) → builtin
+                  [""]    = "builtin",
                   ["lua"] = { "bat", "--style=plain", "--color=always" },
                   ["c"]   = { "bat", "--style=plain", "--color=always" },
                   ["cpp"] = { "bat", "--style=plain", "--color=always" },
                   ["h"]   = { "bat", "--style=plain", "--color=always" },
                   ["md"]  = { "bat", "--style=plain", "--color=always" },
-                  -- add more as you like
                },
             },
          },
+
+         -------------------------------------------------------------------
+         -- FILE SEARCH
+         -------------------------------------------------------------------
          files = {
-            cmd = "fd --type f --hidden --exclude .git",
+            cmd = table.concat({
+               "fd --type f --hidden",
+               "--exclude .git",
+               "--exclude external",
+               "--exclude build",
+               "--exclude assets",
+               "--exclude out",
+               "--exclude third_party",
+               "--exclude node_modules",
+               "--exclude compile_commands.json"
+            }, " "),
             actions = {
                ["default"] = fzf.actions.file_edit,
-               ["ctrl-s"] = fzf.actions.file_split,
-               ["ctrl-v"] = fzf.actions.file_vsplit,
-               ["ctrl-t"] = fzf.actions.file_tabedit,
-               ["ctrl-q"] = fzf.actions.file_quickfix,
+               ["ctrl-s"]  = fzf.actions.file_split,
+               ["ctrl-v"]  = fzf.actions.file_vsplit,
+               ["ctrl-t"]  = fzf.actions.file_tabedit,
+               ["ctrl-q"]  = fzf.actions.file_quickfix,
             },
          },
+
+         -------------------------------------------------------------------
+         -- GREP SEARCH
+         -------------------------------------------------------------------
          grep = {
-            rg_opts = "--hidden --column --line-number --no-heading --color=always --smart-case -g '!.git'",
+            rg_opts = table.concat({
+               "--hidden",
+               "--column",
+               "--line-number",
+               "--no-heading",
+               "--color=always",
+               "--smart-case",
+               "--glob '!*.git'",
+               "--glob '!external/*'",
+               "--glob '!build/*'",
+               "--glob '!assets/*'",
+               "--glob '!out/*'",
+               "--glob '!third_party/*'",
+               "--glob '!node_modules/*'",
+               "--glob '!compile_commands.json'"
+            }, " "),
             actions = {
                ["default"] = fzf.actions.file_edit,
             },

@@ -70,7 +70,7 @@ return {
                "--glob '!compile_commands.json'"
             }, " "),
             actions = {
-               ["default"] = fzf.actions.file_edit,
+               ["default"] = fzf.actions.grep_edit,
             },
          },
       })

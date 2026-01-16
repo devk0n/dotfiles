@@ -15,7 +15,11 @@ map("n", "#", "#zzzv", { desc = "Search word backward (centered)" })
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlight" })
 
 -- Editing
-map("x", "p", [["_dP]], { desc = "Paste without overwriting register" })
+map({ "v", "x" }, "p", '"_dP', { desc = "Paste without overwriting register", noremap = true, silent = true, })
+
+-- Move selected lines
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines down", noremap = true, silent = true, })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up", noremap = true, silent = true, })
 
 -- Get quickfix list safely
 local function qf_has_items()

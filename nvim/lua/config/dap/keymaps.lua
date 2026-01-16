@@ -10,7 +10,7 @@ return function(dap)
    map("n", "<F12>", function() dap.step_out() end)
 
    -- Toggle breakpoint
-   map("n", "<leader>b", function() dap.toggle_breakpoint() end)
+   map("n", "<F9>", function() dap.toggle_breakpoint() end)
 
    -- Set conditional breakpoint
    map("n", "<leader>B", function()
